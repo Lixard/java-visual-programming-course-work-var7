@@ -13,9 +13,9 @@ public final class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        final Parent root = FXMLLoader.load(getClass().getResource("/test.fxml"));
-//        stage.setTitle("First app");
-//        stage.setScene(new Scene(root));
-//        stage.show();
+        final Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/main.fxml"));
+        stage.setTitle("Questionnaire App");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
