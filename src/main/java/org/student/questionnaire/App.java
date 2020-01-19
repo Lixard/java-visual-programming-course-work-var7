@@ -13,7 +13,7 @@ public final class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        final Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/main.fxml"));
+        final Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/mainPage.fxml"));
         stage.setTitle("Questionnaire App");
         stage.setScene(new Scene(root));
         stage.show();
