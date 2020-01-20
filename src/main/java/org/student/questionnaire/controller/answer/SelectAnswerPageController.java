@@ -17,28 +17,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class SelectAnswerPageController extends ControllerUtil {
-
-    private Questioning questioning = Questioning.getInstance();
-    private Properties properties = new Properties();
-
-    @FXML
-    private AnchorPane mainPane;
-
-    @FXML
-    private Button escapeButton;
-
-    @FXML
-    private Label questionLabel;
-
-    @FXML
-    private Label counter;
+public class SelectAnswerPageController extends AbstractAnswerPageController {
 
     @FXML
     private ComboBox<String> answers;
-
-    @FXML
-    private Button nextButton;
 
     @FXML
     private void initialize() {
@@ -49,14 +31,6 @@ public class SelectAnswerPageController extends ControllerUtil {
         bindings();
     }
 
-    private void loadProperties() {
-        try {
-            properties.load(new InputStreamReader(new FileInputStream(PROPERTIES_PATH), StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void bindings() {
         escapeButton.setOnAction(event -> {
             questioning.exit();
@@ -64,36 +38,16 @@ public class SelectAnswerPageController extends ControllerUtil {
         });
         nextButton.setOnAction(event -> {
             questioning.addAnswer(answers.getValue());
-            boolean isQuestioningEnds = questioning.getAnswersCount() >= questioning.getAnswersLimit();
-            if (isQuestioningEnds) {
-                questioning.exit();
-                goToPage(mainPane, "endPage");
-            }
-            else if (isWriteType()) {
-                goToQuestionType(mainPane, 2);
-            } else {
-                goToQuestionType(mainPane, 1);
-            }
+            nextButtonBinding();
         });
     }
 
-    private void setCounter() {
-        counter.setText("Вопрос " + questioning.getAnswersCount() + 1);
-    }
-
-    private void setQuestion() {
-        questionLabel.setText(properties.getProperty("question" + questioning.getAnswersCount()));
-    }
 
     private void setAnswers() {
         String[] answersArray = properties.getProperty("question" + questioning.getAnswersCount() + "answer").split(",");
         ObservableList<String> observableList = FXCollections.observableList(Arrays.asList(answersArray));
         answers.setItems(observableList);
         answers.setValue(observableList.get(0));
-    }
-
-    private boolean isWriteType() {
-        return properties.getProperty("question" + questioning.getAnswersCount() + "answer").equals("");
     }
 
 }

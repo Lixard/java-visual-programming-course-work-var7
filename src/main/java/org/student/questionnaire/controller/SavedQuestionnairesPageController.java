@@ -1,12 +1,23 @@
 package org.student.questionnaire.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import org.student.questionnaire.Database;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 
 public class SavedQuestionnairesPageController extends ControllerUtil {
+
+    private Database database = Database.getInstance();
+
+    private HashMap<Integer, String> questionnaires;
 
     @FXML
     private AnchorPane mainPane;
@@ -15,10 +26,7 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
     private Button backButton;
 
     @FXML
-    private ListView<?> questionnairesList;
-
-    @FXML
-    private Button openButton;
+    private ListView<String> questionnairesList;
 
     @FXML
     private Button changeButton;
@@ -28,9 +36,38 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
 
     @FXML
     private void initialize() {
-        backButton.setOnAction(actionEvent -> {
+        updateList();
+        backButton.setOnAction(event -> {
             goToPage(mainPane, "mainPage");
         });
+        changeButton.setOnAction(event -> {
+            String selected = questionnairesList.getSelectionModel().getSelectedItem();
+            //Дописать
+        });
+        deleteButton.setOnAction(event -> {
+            String selected = questionnairesList.getSelectionModel().getSelectedItem();
+            database.remove(getKey(selected));
+            updateList();
+        });
+    }
+
+    private void updateList() {
+        questionnaires = database.show();
+        ObservableList<String> list = FXCollections.observableList(new ArrayList<>(questionnaires.values()));
+        questionnairesList.setItems(list);
+    }
+
+    private int getKey(String value) {
+        Collection<Integer> keySet = questionnaires.keySet();
+        for (Integer key : keySet) {
+            String mapValue = questionnaires.get(key);
+            if (key != null) {
+                if (value.equals(mapValue)) {
+                    return key;
+                }
+            }
+        }
+        return -1;
     }
 
 }

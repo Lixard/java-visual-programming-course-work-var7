@@ -60,6 +60,6 @@ public class SelectQuestionnaireNamePageController extends ControllerUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return properties.getProperty("question" + questioning.getAnswersCount()+ "answer").equals("");
+        return properties.getProperty("question" + questioning.getAnswersCount() + "answer").equals("");
     }
 }

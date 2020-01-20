@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class ControllerUtil {
-    public final static String PROPERTIES_PATH  = System.getProperty("user.dir") + "\\src\\main\\resources\\questions.properties";
+    public final static String PROPERTIES_PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\questions.properties";
 
     protected void goToPage(Pane mainPane, String pageName) {
         goTo(mainPane, "/FXMLs/" + pageName + ".fxml");

@@ -1,17 +1,31 @@
 package org.student.questionnaire;
 
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+
 public class Questioning {
     private static Questioning instance;
 
-    private final int answersLimit = 10;
-    private int answersCount = 0;
-
-    private String name = null;
-
-    private String[] userAnswers = new String[answersLimit];
+    private final int answersLimit;
+    private int answersCount;
+    private String name;
+    private String[] userAnswers;
 
     private Questioning() {
+        Properties properties = new Properties();
+        try {
+            properties.load(new InputStreamReader(new FileInputStream(System.getProperty("user.dir")
+                    + "\\src\\main\\resources\\questions.properties"), StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        answersLimit = Integer.parseInt(properties.getProperty("answersLimit"));
+        userAnswers = new String[answersLimit];
+        answersCount = 0;
     }
 
     public static Questioning getInstance() {
@@ -36,7 +50,7 @@ public class Questioning {
         return answersLimit;
     }
 
-    public int getNextAnswerCount() {
+    public int getIncAnswersCount() {
         return answersCount + 1;
     }
 
@@ -44,9 +58,9 @@ public class Questioning {
         this.name = name;
     }
 
-    public void pushToDatabase() {
+    public void save() {
         Database database = Database.getInstance();
-        database.pushAnswers(userAnswers);
+        database.save(name, userAnswers);
     }
 
     public void exit() {
