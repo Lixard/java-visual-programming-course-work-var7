@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="334.0" prefWidth="520.0" style="-fx-background-color: #0071BC;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.student.questionnaire.controller.EndPageController">
+   <children>
+      <Label layoutX="120.0" layoutY="25.0" prefHeight="27.0" prefWidth="361.0" text="Анкетирование для курящих " textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="21.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="1.0" layoutY="78.0" prefHeight="322.0" prefWidth="600.0" style="-fx-background-color: #f5f5f5;">
+         <children>
+            <Button fx:id="mainPageButton" layoutX="208.0" layoutY="141.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #0071BC;" text="Вернуться на гланую" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="savedQuestionnairesButton" layoutX="208.0" layoutY="198.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: #0071BC;" text="Сохраненные анкеты" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="73.0" layoutY="51.0" prefHeight="68.0" prefWidth="455.0" text="Анкета успешно пройдена. Данные сохранены." wrapText="true">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

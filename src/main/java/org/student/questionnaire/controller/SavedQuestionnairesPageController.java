@@ -1,17 +1,12 @@
 package org.student.questionnaire.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 
-public class SavedQuestionnairesPageController {
+public class SavedQuestionnairesPageController extends ControllerUtil {
 
     @FXML
     private AnchorPane mainPane;
@@ -34,12 +29,7 @@ public class SavedQuestionnairesPageController {
     @FXML
     private void initialize() {
         backButton.setOnAction(actionEvent -> {
-            try {
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLs/mainPage.fxml"));
-                mainPane.getChildren().setAll(pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            goToPage(mainPane, "mainPage");
         });
     }
 

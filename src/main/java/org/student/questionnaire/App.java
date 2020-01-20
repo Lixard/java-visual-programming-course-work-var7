@@ -6,14 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public final class App extends Application {
+public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        final Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/mainPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLs/mainPage.fxml"));
         stage.setTitle("Questionnaire App");
         stage.setScene(new Scene(root));
         stage.show();

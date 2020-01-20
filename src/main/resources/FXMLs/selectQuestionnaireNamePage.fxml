@@ -31,6 +31,11 @@
                   <Font name="Verdana Bold" size="13.0" />
                </font>
             </Button>
+            <Label fx:id="errorMessage" layoutX="89.0" layoutY="28.0" prefHeight="27.0" prefWidth="422.0" text="Введено некорректное имя. Попробуйте еще раз." textFill="RED" visible="false">
+               <font>
+                  <Font name="Verdana Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

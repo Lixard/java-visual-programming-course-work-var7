@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="334.0" prefWidth="520.0" style="-fx-background-color: #0071BC;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.student.questionnaire.controller.answer.WriteAnswerPageController">
+   <children>
+      <Label layoutX="120.0" layoutY="25.0" prefHeight="27.0" prefWidth="361.0" text="Анкетирование для курящих " textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="21.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="1.0" layoutY="78.0" prefHeight="322.0" prefWidth="600.0" style="-fx-background-color: #f5f5f5;">
+         <children>
+            <Button fx:id="escapeButton" layoutX="486.0" layoutY="14.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0071BC;" text="Выйти" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="questionLabel" alignment="CENTER" layoutX="95.0" layoutY="69.0" prefHeight="67.0" prefWidth="410.0" text="Сколько сигарет в день вы курите?" wrapText="true">
+               <font>
+                  <Font name="Verdana" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="counter" layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="100.0" text="Вопрос 1">
+               <font>
+                  <Font name="Verdana Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="nextButton" layoutX="251.0" layoutY="191.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="100.0" style="-fx-background-color: #0071BC;" text="Далее" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+            <TextField fx:id="answer" layoutX="181.0" layoutY="141.0" prefHeight="27.0" prefWidth="245.0" promptText="Ответ">
+               <font>
+                  <Font name="Verdana" size="12.0" />
+               </font>
+            </TextField>
+            <Label fx:id="errorMessage" alignment="CENTER" layoutX="99.0" layoutY="60.0" prefHeight="18.0" prefWidth="410.0" text="Ответ не может быть пустым, повторите попытку." textFill="RED" visible="false">
+               <font>
+                  <Font name="Verdana Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,15 +1,22 @@
 package org.student.questionnaire.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.student.questionnaire.Questioning;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
-public class SelectQuestionnaireNamePageController {
+
+public class SelectQuestionnaireNamePageController extends ControllerUtil {
+
+    private Questioning questioning = Questioning.getInstance();
 
     @FXML
     private AnchorPane mainPane;
@@ -21,21 +28,38 @@ public class SelectQuestionnaireNamePageController {
     private TextField questionnaireName;
 
     @FXML
+    private Label errorMessage;
+
+    @FXML
     private Button startButton;
 
     @FXML
     private void initialize() {
         backButton.setOnAction(actionEvent -> {
-            try {
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/FXMLs/mainPage.fxml"));
-                mainPane.getChildren().setAll(pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            goToPage(mainPane, "mainPage");
         });
         startButton.setOnAction(actionEvent -> {
-            // здесь должен начинаться тест
+            String name = questionnaireName.getText();
+            if (name.equals("")) {
+                errorMessage.setVisible(true);
+            } else {
+                questioning.setName(name);
+                if (isWriteType()) {
+                    goToQuestionType(mainPane, 2);
+                } else {
+                    goToQuestionType(mainPane, 1);
+                }
+            }
         });
     }
 
+    private boolean isWriteType() {
+        Properties properties = new Properties();
+        try {
+            properties.load(new InputStreamReader(new FileInputStream(PROPERTIES_PATH), StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return properties.getProperty("question" + questioning.getAnswersCount()+ "answer").equals("");
+    }
 }
