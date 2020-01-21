@@ -64,7 +64,7 @@ public class Database {
     public ArrayList<Question> showQuestions(int questionnaireId) {
         ArrayList<Question> result = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select id, question_number, answer from answers where questionnaire_id = ?");
+            PreparedStatement statement = connection.prepareStatement("select id, question_number, answer from answers where questionnaire_id = ? order by id asc");
             statement.setInt(1, questionnaireId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -80,6 +80,18 @@ public class Database {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public void changeAnswer(int id, String answer) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("update answers set answer = ? where id = ?");
+            statement.setString(1, answer);
+            statement.setInt(2, id);
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void remove(int id) {

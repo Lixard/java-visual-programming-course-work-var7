@@ -45,7 +45,6 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
             String selected = questionnairesList.getSelectionModel().getSelectedItem();
             QuestionChanger questionChanger = QuestionChanger.getInstance();
             questionChanger.setQuestionnaireId(getKey(selected));
-            questionChanger.createQuestions();
             goToPage(mainPane, "savedAnswersPage");
         });
         deleteButton.setOnAction(event -> {

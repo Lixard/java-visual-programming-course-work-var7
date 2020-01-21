@@ -32,7 +32,6 @@ public class SelectAnswerPageController extends AbstractAnswerPageController {
         });
     }
 
-
     private void setAnswers() {
         String[] answersArray = properties.getProperty("question" + questioning.getAnswersCount() + "answer").split(",");
         ObservableList<String> observableList = FXCollections.observableList(Arrays.asList(answersArray));

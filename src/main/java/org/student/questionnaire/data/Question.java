@@ -12,6 +12,7 @@ import static org.student.questionnaire.controller.ControllerUtil.PROPERTIES_PAT
 
 public class Question {
     private int id;
+    private int questionNumber;
     private SimpleStringProperty question;
     private SimpleStringProperty answer;
 
@@ -23,6 +24,7 @@ public class Question {
             e.printStackTrace();
         }
         this.id = id;
+        this.questionNumber = questionNumber;
         this.question = new SimpleStringProperty(properties.getProperty("question" + questionNumber));
         this.answer = new SimpleStringProperty(answer);
     }
@@ -45,5 +47,9 @@ public class Question {
 
     public SimpleStringProperty answerProperty() {
         return answer;
+    }
+
+    public int getQuestionNumber() {
+        return questionNumber;
     }
 }

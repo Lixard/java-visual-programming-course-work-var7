@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class QuestionChanger {
     private static QuestionChanger instance;
+    private Database database = Database.getInstance();
 
     private int questionnaireId;
-    private ArrayList<Question> questions;
 
     private QuestionChanger() {
     }
@@ -29,12 +29,12 @@ public class QuestionChanger {
     }
 
     public ArrayList<Question> getQuestions() {
-        return questions;
+        return database.showQuestions(questionnaireId);
+
     }
 
-    public void createQuestions() {
-        Database database = Database.getInstance();
-        this.questions = database.showQuestions(questionnaireId);
+    public void changeAnswer(int id, String answer) {
+        database.changeAnswer(id, answer);
     }
 
     public void close() {
