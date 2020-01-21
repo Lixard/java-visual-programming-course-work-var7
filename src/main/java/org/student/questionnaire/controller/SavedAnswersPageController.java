@@ -61,11 +61,13 @@ public class SavedAnswersPageController extends ControllerUtil {
 
         changeButton.setOnAction(event -> {
             Question selected = tableView.getSelectionModel().getSelectedItem();
-            boolean isWriteType = properties.getProperty("question" + selected.getQuestionNumber() + "answer").equals("");
-            if (isWriteType) {
-                textAnswerDialog(selected);
-            } else {
-                choiceAnswerDialog(selected);
+            if (selected != null) {
+                boolean isWriteType = properties.getProperty("question" + selected.getQuestionNumber() + "answer").equals("");
+                if (isWriteType) {
+                    textAnswerDialog(selected);
+                } else {
+                    choiceAnswerDialog(selected);
+                }
             }
         });
     }

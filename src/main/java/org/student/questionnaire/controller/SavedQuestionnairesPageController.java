@@ -43,14 +43,18 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
         });
         showButton.setOnAction(event -> {
             String selected = questionnairesList.getSelectionModel().getSelectedItem();
-            QuestionChanger questionChanger = QuestionChanger.getInstance();
-            questionChanger.setQuestionnaireId(getKey(selected));
-            goToPage(mainPane, "savedAnswersPage");
+            if (selected != null) {
+                QuestionChanger questionChanger = QuestionChanger.getInstance();
+                questionChanger.setQuestionnaireId(getKey(selected));
+                goToPage(mainPane, "savedAnswersPage");
+            }
         });
         deleteButton.setOnAction(event -> {
             String selected = questionnairesList.getSelectionModel().getSelectedItem();
-            database.remove(getKey(selected));
-            updateList();
+            if (selected != null) {
+                database.remove(getKey(selected));
+                updateList();
+            }
         });
     }
 
