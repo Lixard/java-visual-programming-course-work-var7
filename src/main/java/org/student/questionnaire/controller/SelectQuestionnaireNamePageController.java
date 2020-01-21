@@ -5,12 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.student.questionnaire.Database;
 import org.student.questionnaire.Questioning;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Properties;
 
 
@@ -40,7 +42,7 @@ public class SelectQuestionnaireNamePageController extends ControllerUtil {
         });
         startButton.setOnAction(actionEvent -> {
             String name = questionnaireName.getText();
-            if (name.equals("")) {
+            if (name.equals("") || isNameExists(name)) {
                 errorMessage.setVisible(true);
             } else {
                 questioning.setName(name);
@@ -61,5 +63,11 @@ public class SelectQuestionnaireNamePageController extends ControllerUtil {
             e.printStackTrace();
         }
         return properties.getProperty("question" + questioning.getAnswersCount() + "answer").equals("");
+    }
+
+    private boolean isNameExists(String name) {
+        Database database = Database.getInstance();
+        HashMap<Integer, String> map = database.showQuestionnaires();
+        return map.containsValue(name);
     }
 }

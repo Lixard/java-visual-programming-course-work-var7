@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import org.student.questionnaire.Database;
+import org.student.questionnaire.QuestionChanger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
     private ListView<String> questionnairesList;
 
     @FXML
-    private Button changeButton;
+    private Button showButton;
 
     @FXML
     private Button deleteButton;
@@ -40,9 +41,12 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
         backButton.setOnAction(event -> {
             goToPage(mainPane, "mainPage");
         });
-        changeButton.setOnAction(event -> {
+        showButton.setOnAction(event -> {
             String selected = questionnairesList.getSelectionModel().getSelectedItem();
-            //Дописать
+            QuestionChanger questionChanger = QuestionChanger.getInstance();
+            questionChanger.setQuestionnaireId(getKey(selected));
+            questionChanger.createQuestions();
+            goToPage(mainPane, "savedAnswersPage");
         });
         deleteButton.setOnAction(event -> {
             String selected = questionnairesList.getSelectionModel().getSelectedItem();
@@ -52,7 +56,7 @@ public class SavedQuestionnairesPageController extends ControllerUtil {
     }
 
     private void updateList() {
-        questionnaires = database.show();
+        questionnaires = database.showQuestionnaires();
         ObservableList<String> list = FXCollections.observableList(new ArrayList<>(questionnaires.values()));
         questionnairesList.setItems(list);
     }

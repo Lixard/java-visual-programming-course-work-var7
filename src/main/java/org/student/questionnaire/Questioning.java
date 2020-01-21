@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import static org.student.questionnaire.controller.ControllerUtil.PROPERTIES_PATH;
+
 public class Questioning {
     private static Questioning instance;
 
@@ -18,8 +20,7 @@ public class Questioning {
     private Questioning() {
         Properties properties = new Properties();
         try {
-            properties.load(new InputStreamReader(new FileInputStream(System.getProperty("user.dir")
-                    + "\\src\\main\\resources\\questions.properties"), StandardCharsets.UTF_8));
+            properties.load(new InputStreamReader(new FileInputStream(PROPERTIES_PATH), StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }

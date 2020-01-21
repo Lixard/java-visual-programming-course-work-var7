@@ -1,6 +1,9 @@
 package org.student.questionnaire;
 
+import org.student.questionnaire.data.Question;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
@@ -42,17 +45,41 @@ public class Database {
     }
 
 
-    public HashMap<Integer, String> show() {
+    public HashMap<Integer, String> showQuestionnaires() {
         HashMap<Integer, String> map = new HashMap<>();
         try {
-            ResultSet resultSet = connection.createStatement().executeQuery("select id, name from questionnaire");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select id, name from questionnaire");
             while (resultSet.next()) {
                 map.put(resultSet.getInt(1), resultSet.getString(2));
             }
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return map;
+    }
+
+    public ArrayList<Question> showQuestions(int questionnaireId) {
+        ArrayList<Question> result = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select id, question_number, answer from answers where questionnaire_id = ?");
+            statement.setInt(1, questionnaireId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                int questionNumber = resultSet.getInt(2);
+                String answer = resultSet.getString(3);
+                Question question = new Question(id, questionNumber, answer);
+                result.add(question);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void remove(int id) {
